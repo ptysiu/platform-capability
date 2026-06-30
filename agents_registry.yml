@@ -1,0 +1,69 @@
+# agents_registry.yml — Capability Development
+#
+# Rejestr agentów meta-capability: Capability Development.
+# Każdy agent ma własny katalog z PROCESS_CARD.md i context.md.
+#
+# enabled: true  → agent gotowy do użycia
+# enabled: false → w budowie
+
+agents:
+
+  - id: orchestrator
+    name: Capability Orchestrator
+    dir: orchestrator/
+    process_card: orchestrator/PROCESS_CARD.md
+    context: orchestrator/context.md
+    enabled: true
+    status: active
+    role: >
+      Zarządza flow całego Capability Development workflow.
+      Bramkuje PO na kluczowych decyzjach. Koordynuje subagentów.
+      Śledzi stan capabilities w STATE.md.
+
+  - id: ba_agent
+    name: BA Agent
+    dir: ba_agent_process/
+    process_card: ba_agent_process/PROCESS_CARD.md
+    context: ba_agent_process/context.md
+    enabled: true
+    status: active
+    role: >
+      Elicytuje wymagania od PO (sesja refinement, max 5 pytań).
+      Produkuje CHARTER.md draft i wymagania na PROCESS_CARDs.
+      Waliduje scope i acceptance criteria.
+
+  - id: process_architect
+    name: Process Architect
+    dir: process_architect/
+    process_card: process_architect/PROCESS_CARD.md
+    context: process_architect/context.md
+    enabled: true
+    status: active
+    role: >
+      Projektuje komponenty nowej capability: PROCESS_CARD dla każdego procesu,
+      agents_registry.yml, STATE.md template, context.md templates dla agentów.
+      Wejście: zatwierdzony CHARTER. Wyjście: komplet plików gotowych do Bootstrap.
+
+  - id: process_implementer
+    name: Process Implementer
+    dir: process_implementer/
+    process_card: process_implementer/PROCESS_CARD.md
+    context: process_implementer/context.md
+    enabled: true
+    status: active
+    role: >
+      Tworzy strukturę repo i pliki nowej capability.
+      Uruchamia Bootstrap: tworzy katalogi, kopiuje templates, wypełnia context.md.
+      Wejście: artefakty Process Architect. Wyjście: repo gotowe do PoC.
+
+  - id: process_validator
+    name: Process Validator
+    dir: process_validator/
+    process_card: process_validator/PROCESS_CARD.md
+    context: process_validator/context.md
+    enabled: true
+    status: active
+    role: >
+      Uruchamia PoC nowej capability. Waliduje każde AC z CHARTER.
+      Pisze test report. Identyfikuje co wymaga poprawki.
+      Wejście: zbootstrapowane repo. Wyjście: test report PASS/FAIL per AC.
